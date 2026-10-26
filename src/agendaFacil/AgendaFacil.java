@@ -35,25 +35,25 @@ public class AgendaFacil {
     }
 
     public int cadastrarPalestra(String titulo, String descricao, String data, int maxParticipantes) {
-        int x = proximoIdEvento++;
-        eventos.put(x, new Palestra(x, titulo, descricao, data, maxParticipantes));
-        return x;
+        int idEvento = proximoIdEvento++;
+        eventos.put(idEvento, new Palestra(idEvento, titulo, descricao, data, maxParticipantes));
+        return idEvento;
     }
 
     public int cadastrarWorkshop(String titulo, String descricao, String data,
                                  int maxParticipantes, int duracao) {
-        int x = proximoIdEvento++;
-        eventos.put(x, new Workshop(x, titulo, descricao, data, maxParticipantes, duracao));
-        return x;
+        int idEvento = proximoIdEvento++;
+        eventos.put(idEvento, new Workshop(idEvento, titulo, descricao, data, maxParticipantes, duracao));
+        return idEvento;
     }
 
     public int cadastrarOficinaAprendizagem(String titulo, String descricao, String data,
                                              int maxParticipantes, int duracao,
                                              boolean certificacao) {
-        int x = proximoIdEvento++;
-        eventos.put(x, new OficinaAprendizagem(x, titulo, descricao, data,
+        int idEvento = proximoIdEvento++;
+        eventos.put(idEvento, new OficinaAprendizagem(idEvento, titulo, descricao, data,
                 maxParticipantes, duracao, certificacao));
-        return x;
+        return idEvento;
     }
 
     public boolean inscreverParticipanteEmEvento(String emailParticipante, int idEvento) {
@@ -69,25 +69,10 @@ public class AgendaFacil {
             return false;
         }
         estudante.inscrever(idEvento);
-        estudante.adicionarPontos(calcularPontosDoEvento(evento));
+        estudante.adicionarPontos(evento.getPontuacao());
         return true;
     }
 
-    private int calcularPontosDoEvento(Evento e) {
-        if (e instanceof Palestra) {
-            return 2;
-        } else if (e instanceof Workshop) {
-            return ((Workshop) e).getDuracaoHoras();
-        } else if (e instanceof OficinaAprendizagem) {
-            OficinaAprendizagem a = (OficinaAprendizagem) e;
-            int pontos = a.getDuracaoHoras();
-            if (a.isEmiteCertificado()) {
-                pontos += 10;
-            }
-            return pontos;
-        }
-        return 0;
-    }
 
     public String exibirDetalhesEvento(int idEvento) {
         Evento evento = eventos.get(idEvento);

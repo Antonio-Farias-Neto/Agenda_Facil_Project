@@ -61,9 +61,6 @@ Agenda_Facil_Project/
 #### OficinaAprendizagem.java
 - Subclasse de Evento (pontos por duração e certificado)
 
-#### GeradorRelatorio.java
-- Interface genérica para geração de relatórios
-
 #### TestarAgendaFacil.java (pasta `testes`)
 - Testes automatizados (JUnit 5) das funcionalidades do sistema
 
