@@ -35,6 +35,14 @@
 
 ## 📁 Estrutura de Classes
 
+O código-fonte fica em `src/agendaFacil` e os testes em `testes/agendaFacil`.
+
+```
+Agenda_Facil_Project/
+├── src/agendaFacil/      # código-fonte
+└── testes/agendaFacil/   # testes automatizados
+```
+
 #### AgendaFacil.java
 - Classe principal de controle do sistema
 
@@ -56,7 +64,7 @@
 #### GeradorRelatorio.java
 - Interface genérica para geração de relatórios
 
-#### TestarAgendaFacil.java
+#### TestarAgendaFacil.java (pasta `testes`)
 - Testes automatizados (JUnit 5) das funcionalidades do sistema
 
 ---
@@ -70,10 +78,10 @@ git clone https://github.com/seu-usuario/agenda-facil.git
 cd agenda-facil
 ```
 
-2. Compile todos os arquivos `.java` (a partir da pasta que contém o diretório `agendaFacil`):
+2. Compile os arquivos `.java` do código-fonte (a partir da raiz do projeto):
 
 ```bash
-javac agendaFacil/*.java
+javac -d bin src/agendaFacil/*.java
 ```
 
 3. Crie sua própria classe `Main` para interagir com a `AgendaFacil`, ou use os testes automatizados para simular o uso do sistema.
@@ -82,14 +90,14 @@ javac agendaFacil/*.java
 
 ## 🧪 Como Executar os Testes
 
-Os testes ficam em `TestarAgendaFacil.java` e usam **JUnit 5**. Para executá-los:
+Os testes ficam em `testes/agendaFacil/TestarAgendaFacil.java` e usam **JUnit 5**. Para executá-los:
 
-- Em uma IDE (VS Code, Eclipse, IntelliJ), adicione o JUnit 5 ao projeto e execute a classe `TestarAgendaFacil`.
-- Pela linha de comando, usando o `junit-platform-console-standalone`:
+- Em uma IDE (VS Code, Eclipse, IntelliJ), adicione `src` e `testes` como pastas de código-fonte, inclua o JUnit 5 no projeto e execute a classe `TestarAgendaFacil`.
+- Pela linha de comando (a partir da raiz do projeto), usando o `junit-platform-console-standalone`:
 
 ```bash
-javac -cp junit-platform-console-standalone.jar agendaFacil/*.java
-java -jar junit-platform-console-standalone.jar -cp . --scan-classpath
+javac -cp junit-platform-console-standalone.jar -d bin src/agendaFacil/*.java testes/agendaFacil/*.java
+java -jar junit-platform-console-standalone.jar --class-path bin --scan-class-path
 ```
 
 ---
