@@ -1,54 +1,45 @@
 package agendaFacil;
 
-import java.util.Objects;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Estudante {
-	private String nome;
-	private String email;
-	private int qtdEventos;
-	private int qtdPontos;
-	
-	public Estudante(String nome, String email) {
-		this.nome = nome;
-		this.email = email;
-	}
+    private final String nome;
+    private final String email;
+    private int pontos;
+    private final Set<Integer> eventosInscritos = new LinkedHashSet<>();
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(email);
-	}
+    public Estudante(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+        this.pontos = 0;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Estudante other = (Estudante) obj;
-		return Objects.equals(email, other.email);
-	}
-	
-	
-	public int getQtdPontos() {
-		return qtdPontos;
-	}
+    public String getNome() { return nome; }
+    public String getEmail() { return email; }
+    public int getPontos() { return pontos; }
+    public int getQuantidadeEventos() { return eventosInscritos.size(); }
 
-	public void setQtdPontos(int qtdPontos) {
-		this.qtdPontos = qtdPontos;
-	}
-	
-	public String getEmail() {
-		return this.email;
-	}
-	
-	public String getNome() {
-		return this.nome;
-	}
+    public boolean estaInscrito(int idEvento) {
+        return eventosInscritos.contains(idEvento);
+    }
 
-	@Override
-	public String toString() {
-		return "Nome: " + this.nome + "\n" + "Quantidade de eventos: " + this.qtdEventos + "\n"  + "Pontos: " + this.qtdPontos;
-	}
+    public boolean inscrever(int idEvento) {
+        return eventosInscritos.add(idEvento);
+    }
+
+    public void adicionarPontos(int quantidade) {
+        pontos += quantidade;
+    }
+
+    public Set<Integer> getEventosInscritos() {
+        return new LinkedHashSet<>(eventosInscritos);
+    }
+
+    public String exibirDetalhes() {
+        return "Nome: " + nome
+                + "\nE-mail: " + email
+                + "\nQuantidade de eventos: " + getQuantidadeEventos()
+                + "\nPontos: " + pontos;
+    }
 }
